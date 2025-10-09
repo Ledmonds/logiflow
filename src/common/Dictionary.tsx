@@ -1,6 +1,10 @@
+import { IDictionary } from "./IDictionary";
 import { IEquatiable } from "./IEquatiable";
+import { IReadOnlyDictionary } from "./IReadOnlyDictionary";
 
 export class Dictionary<TKey extends IEquatiable<TKey>, TItem>
+    implements IDictionary<TKey, TItem>,
+    IReadOnlyDictionary<TKey, TItem>
 {
     private map: Map<string, TItem> = new Map();
 
