@@ -1,3 +1,5 @@
-export interface ILogicGate {
-    evaluate: () => boolean;
+import { INode } from "./INode";
+
+export interface ILogicGate extends INode {
 }
+

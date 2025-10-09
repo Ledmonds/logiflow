@@ -1,12 +1,22 @@
 import { IDictionary } from "./IDictionary";
 import { IEquatiable } from "./IEquatiable";
 import { IReadOnlyDictionary } from "./IReadOnlyDictionary";
+import { TryGetResponse } from "./TryGetResponse";
 
 export class Dictionary<TKey extends IEquatiable<TKey>, TItem>
     implements IDictionary<TKey, TItem>,
     IReadOnlyDictionary<TKey, TItem>
 {
     private map: Map<string, TItem> = new Map();
+
+    public tryGet(key: TKey): TryGetResponse<TItem> {
+        var hash = key.hash();
+        var item = this.map.get(hash);
+
+        return item == undefined
+            ? TryGetResponse.failed()
+            : TryGetResponse.success(item);
+    }
 
     public add(key: TKey, item: TItem): void
     {

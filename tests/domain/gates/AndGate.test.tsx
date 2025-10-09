@@ -6,7 +6,10 @@ describe('AndGate logically ANDs inputs', () => {
     [false, true, false],
     [true, false, false],
     [true, true, true],
-    
+    [null, false, null],
+    [false, null, null],
+    [null, true, null],
+    [true, null, null]
   ])('evaluate(%s) should return %s', (inputA, inputB, expected) => {
     const gate = new AndGate();
     gate.setInputA(inputA);

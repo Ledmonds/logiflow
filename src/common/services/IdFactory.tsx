@@ -1,4 +1,4 @@
-import { Id } from '../../common/Id';
+import { Id } from '../Id';
 
 export function CreateId(): Id {
     var id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {

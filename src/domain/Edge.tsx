@@ -1,9 +1,9 @@
 import { Id } from '../common/Id';
-import { CreateId } from './services/IdFactory';
+import { CreateId } from '../common/services/IdFactory';
 
 export class Edge {
     private isActive: boolean = false;
-    readonly Id: Id = CreateId();
+    readonly id: Id = CreateId();
     readonly incomingNodeId: Id;
     readonly outgoingNodeId: Id;
 
@@ -16,8 +16,8 @@ export class Edge {
         this.outgoingNodeId = outgoingNodeId;
     }
 
-    toggle() {
-        this.isActive = !this.isActive;
+    setActive(active: boolean) {
+        this.isActive = active;
     }
 
     isActivated = (): boolean =>  this.isActive;

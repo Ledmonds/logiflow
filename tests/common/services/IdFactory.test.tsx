@@ -1,4 +1,4 @@
-import { CreateId } from "../../../src/domain/services/IdFactory";
+import { CreateId } from "../../../src/common/services/IdFactory";
 
 describe('IdFactory', () => {
     it('should create a non-empty Id', () => {

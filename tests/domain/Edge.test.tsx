@@ -12,15 +12,8 @@ describe('Edges active state', () => {
 
     it('should be activated after toggling', () => {
         const edge = new Edge(incomingNodeId, outgoingNodeId);
-        edge.toggle();
+        edge.setActive(true);
         expect(edge.isActivated()).toBe(true);
-    });
-
-    it('should toggle back to deactivated state', () => {
-        const edge = new Edge(incomingNodeId, outgoingNodeId);
-        edge.toggle();
-        edge.toggle();
-        expect(edge.isActivated()).toBe(false);
     });
 });
 
