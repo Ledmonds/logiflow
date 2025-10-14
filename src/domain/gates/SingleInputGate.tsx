@@ -1,18 +1,22 @@
 import { CreateId } from '../../common/services/IdFactory';
-import { Id } from '../../common/Id';
 import { ILogicGate } from './ILogicGate';
+import { Connector } from './Connector';
+import { NodeId } from '../../common/ids/LogicGateId';
 
 export abstract class SingleInputGate implements ILogicGate {
-    readonly id: Id = CreateId();
-    protected input: boolean | null = null;
+    kind: string = SingleInputGate.kind;
+    public static kind: string = "single";
+    public readonly output: Connector = new Connector();
+    public readonly id: NodeId = CreateId(NodeId);
+    public readonly input: Connector = new Connector();
     
-    abstract evaluate(): boolean | null;
+    public abstract evaluate(): boolean | null;
     
-    setInput(value: boolean | null) {
-        this.input = value;
+    public setInput(value: boolean | null) {
+        this.input.setActive(value);
     }
 
-    isEvaluatable(): boolean {
-        return this.input != null;
+    public isEvaluatable(): boolean {
+        return this.input.isSet();
     }
 }

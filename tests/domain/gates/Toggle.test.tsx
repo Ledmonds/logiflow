@@ -4,17 +4,17 @@ describe('Toggle', () => {
     it('should be active by default', () => {
         var toggle = new Toggle();
 
-        expect(toggle.isActive()).toBe(true);
+        expect(toggle.evaluate()).toBe(true);
     });
 
     it('toggling changes the toggles state between active and inactive', () => {
         var toggle = new Toggle();
-        expect(toggle.isActive()).toBe(true);
+        expect(toggle.evaluate()).toBe(true);
 
         toggle.toggle();
-        expect(toggle.isActive()).toBe(false);
+        expect(toggle.evaluate()).toBe(false);
 
         toggle.toggle();
-        expect(toggle.isActive()).toBe(true);
+        expect(toggle.evaluate()).toBe(true);
     });
 });

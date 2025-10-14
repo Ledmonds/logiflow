@@ -2,11 +2,8 @@ import { DualInputLogicGate } from './DualInputLogicGate';
 
 export class AndGate extends DualInputLogicGate {
   evaluate(): boolean | null {
-    if (this.inputA == null || this.inputB == null)
-    {
-      return null;
-    }
-
-    return this.inputA && this.inputB;
+    return this.isEvaluatable()
+      ? this.inputA.isActive() && this.inputB.isActive()
+      : null;
   }
 }

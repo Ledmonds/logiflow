@@ -1,22 +1,41 @@
 import { CreateId } from '../../common/services/IdFactory';
-import { Id } from '../../common/Id';
 import { ILogicGate } from './ILogicGate';
+import { Connector } from './Connector';
+import { NodeId } from '../../common/ids/LogicGateId';
+import { ConnectorId } from '../../common/ids/ConnectorId';
 
 export abstract class DualInputLogicGate implements ILogicGate {
-    readonly id: Id = CreateId();
-    protected inputA: boolean | null = null;
-    protected inputB: boolean | null = null;
+    kind: string = DualInputLogicGate.kind;
+    public static kind: string = "dual";
+    public readonly id: NodeId = CreateId(NodeId);
+    public readonly inputA: Connector = new Connector();
+    public readonly inputB: Connector = new Connector();
+    public readonly output: Connector = new Connector();
     
-    abstract evaluate(): boolean | null;
+    public abstract evaluate(): boolean | null;
 
-    setInputA(value: boolean | null) {
-        this.inputA = value;
-    }
-    setInputB(value: boolean | null) {
-        this.inputB = value;
+    public setInput(connectorId: ConnectorId, value: boolean | null) {
+        var connector = this.getConnectorById(connectorId);
+
+        connector.setActive(value);
     }
 
-    isEvaluatable(): boolean {
-        return this.inputA != null && this.inputB != null;
+    public isEvaluatable(): boolean {
+        return this.inputA.isSet() && this.inputB.isSet();
+    }
+
+    private getConnectorById(id: ConnectorId)
+    {
+        if (this.inputA.id.equals(id)) {
+            return this.inputA;
+        }
+        
+        if (this.inputB.id.equals(id)) {
+            return this.inputB;
+        }
+
+        throw new Error("connector with the provided id does not exist for this edge");
     }
 }
+
+

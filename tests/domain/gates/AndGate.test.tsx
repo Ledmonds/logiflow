@@ -12,8 +12,8 @@ describe('AndGate logically ANDs inputs', () => {
     [true, null, null]
   ])('evaluate(%s) should return %s', (inputA, inputB, expected) => {
     const gate = new AndGate();
-    gate.setInputA(inputA);
-    gate.setInputB(inputB);
+    gate.setInput(gate.inputA.id, inputA);
+    gate.setInput(gate.inputB.id, inputB);
 
     expect(gate.evaluate()).toBe(expected);
   });

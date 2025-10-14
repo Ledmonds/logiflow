@@ -1,7 +1,7 @@
-import { Id } from "../../src/common/Id";
+import { ConnectorId } from "../../src/common/ids/ConnectorId";
 
 describe('Id', () => {
     it('throws an error if initialized with an empty string', () => {
-        expect(() => new Id('')).toThrow("Id cannot be empty");
+        expect(() => new ConnectorId('')).toThrow("Id cannot be empty");
     });
 });

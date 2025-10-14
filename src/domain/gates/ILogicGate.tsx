@@ -1,5 +1,3 @@
 import { INode } from "./INode";
 
-export interface ILogicGate extends INode {
-}
-
+export interface ILogicGate extends INode {}

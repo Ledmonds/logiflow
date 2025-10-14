@@ -1,7 +1,7 @@
-import { IEquatiable } from './IEquatiable';
+import { IEquatiable } from '../IEquatiable';
 
-export class Id implements IEquatiable<Id> {
-    readonly Id: string;
+export abstract class Id implements IEquatiable<Id> {
+    private readonly Id: string;
 
     constructor(id: string) {
         if (id.length === 0 || id === undefined) {
@@ -11,7 +11,7 @@ export class Id implements IEquatiable<Id> {
         this.Id = id;
     }
 
-    hash(): string {
+    public hash(): string {
         return this.Id;
     }
 
@@ -19,3 +19,4 @@ export class Id implements IEquatiable<Id> {
         return this.Id === other.Id;
     }
 }
+

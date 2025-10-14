@@ -1,19 +1,20 @@
-import { Id } from '../common/Id';
+import { ConnectorId } from '../common/ids/ConnectorId';
+import { EdgeId } from '../common/ids/EdgeId';
 import { CreateId } from '../common/services/IdFactory';
 
 export class Edge {
     private isActive: boolean = false;
-    readonly id: Id = CreateId();
-    readonly incomingNodeId: Id;
-    readonly outgoingNodeId: Id;
+    public readonly id: EdgeId = CreateId(EdgeId);
+    public readonly incomingConnectorId: ConnectorId;
+    public readonly outgoingConnectorId: ConnectorId;
 
-    constructor(incomingNodeId: Id, outgoingNodeId: Id) {
+    constructor(incomingNodeId: ConnectorId, outgoingNodeId: ConnectorId) {
         if (incomingNodeId.equals(outgoingNodeId)) {
             throw new Error("An edge cannot connect a node to itself");
         }
 
-        this.incomingNodeId = incomingNodeId;
-        this.outgoingNodeId = outgoingNodeId;
+        this.incomingConnectorId = incomingNodeId;
+        this.outgoingConnectorId = outgoingNodeId;
     }
 
     setActive(active: boolean) {
