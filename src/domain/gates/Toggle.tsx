@@ -1,6 +1,6 @@
 import { NodeId } from "../../common/ids/LogicGateId";
 import { CreateId } from "../../common/services/IdFactory";
-import { Connector } from "./Connector";
+import { Connector } from "../Connector";
 import { INode } from "./INode";
 
 export class Toggle implements INode {

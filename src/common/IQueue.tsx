@@ -2,8 +2,7 @@ export interface IQueue<TItem>
 {
     enqueue(item: TItem): void;
     dequeue(): TItem;
-    peek(): TItem | null;
+    peek(): TItem;
     isEmpty(): boolean;
+    length: number;
 }
-
-;

@@ -11,7 +11,7 @@ import { SingleInputGate } from "./gates/SingleInputGate";
 import { NodeId } from "../common/ids/LogicGateId";
 import { ConnectorId } from "../common/ids/ConnectorId";
 import { DualInputLogicGate } from "./gates/DualInputLogicGate";
-import { Connector } from "./gates/Connector";
+import { Connector } from "./Connector";
 
 export class Diagram {
     private connectors: IDictionary<ConnectorId, INode> = new Dictionary<ConnectorId, INode>();

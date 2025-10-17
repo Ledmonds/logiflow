@@ -1,5 +1,5 @@
-import { ConnectorId } from '../../common/ids/ConnectorId';
-import { CreateId } from '../../common/services/IdFactory';
+import { ConnectorId } from '../common/ids/ConnectorId';
+import { CreateId } from '../common/services/IdFactory';
 
 export class Connector {
     private _active: boolean | null = null; 

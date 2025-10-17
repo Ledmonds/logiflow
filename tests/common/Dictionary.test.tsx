@@ -1,22 +1,21 @@
 import { Dictionary } from "../../src/common/Dictionary";
-import { EdgeId } from "../../src/common/ids/EdgeId";
-import { Id } from "../../src/common/ids/Id";
+import { TestId } from "./ids/Id.test";
 
 describe('Dictionary', () => {
     it('throws when adding the same key twice', () => {
-        var dict = new Dictionary<EdgeId, string>();
-        var key = new EdgeId("abc");      
+        var dict = new Dictionary<TestId, string>();
+        var key = new TestId("abc");      
         dict.add(key, "random input");
 
         expect(() => dict.add(key, "something else")).toThrow("the key already exists in the dictionary");
     });
     
     it('can retreive added items', () => {
-        var dict = new Dictionary<EdgeId, string>();
-        var itemId = new EdgeId("abc");
+        var dict = new Dictionary<TestId, string>();
+        var itemId = new TestId("abc");
         var itemInput = "hello world";
         dict.add(itemId, itemInput);
-        dict.add(new EdgeId("random-id"), "ensure we do not retreive the only item");
+        dict.add(new TestId("random-id"), "ensure we do not retreive the only item");
 
         var result = dict.get(itemId);
 
@@ -24,8 +23,8 @@ describe('Dictionary', () => {
     });
 
     it('can retreive updated items', () => {
-        var dict = new Dictionary<EdgeId, string>();
-        var itemId = new EdgeId("abc");
+        var dict = new Dictionary<TestId, string>();
+        var itemId = new TestId("abc");
         dict.add(itemId, "initial");
         dict.update(itemId, "updated");
 
@@ -35,8 +34,8 @@ describe('Dictionary', () => {
     });
 
     it('throws when getting non-existent item', () => {
-        var dict = new Dictionary<EdgeId, string>();
-        var nonExistentId = new EdgeId("i-do-not-exist");
+        var dict = new Dictionary<TestId, string>();
+        var nonExistentId = new TestId("i-do-not-exist");
         
         expect(() => dict.get(nonExistentId)).toThrow("no item exists with the given key");
     });

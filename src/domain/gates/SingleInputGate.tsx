@@ -1,6 +1,6 @@
 import { CreateId } from '../../common/services/IdFactory';
 import { ILogicGate } from './ILogicGate';
-import { Connector } from './Connector';
+import { Connector } from '../Connector';
 import { NodeId } from '../../common/ids/LogicGateId';
 
 export abstract class SingleInputGate implements ILogicGate {

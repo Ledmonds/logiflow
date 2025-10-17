@@ -1,4 +1,4 @@
-import { Connector } from "../../../src/domain/gates/Connector";
+import { Connector } from "../../src/domain/Connector";
 
 describe('Connector', () => {
     it('returns false when not set after initialisation', () => {
