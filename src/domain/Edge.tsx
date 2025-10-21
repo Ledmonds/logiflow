@@ -1,25 +1,25 @@
-import { ConnectorId } from '../common/ids/ConnectorId';
-import { EdgeId } from '../common/ids/EdgeId';
-import { CreateId } from '../common/services/IdFactory';
+import { ConnectorId } from "../common/ids/ConnectorId";
+import { EdgeId } from "../common/ids/EdgeId";
+import { CreateId } from "../common/services/IdFactory";
 
 export class Edge {
-    private isActive: boolean = false;
-    public readonly id: EdgeId = CreateId(EdgeId);
-    public readonly incomingConnectorId: ConnectorId;
-    public readonly outgoingConnectorId: ConnectorId;
+  private isActive: boolean = false;
+  public readonly id: EdgeId = CreateId(EdgeId);
+  public readonly targetId: ConnectorId;
+  public readonly sourceId: ConnectorId;
 
-    constructor(incomingNodeId: ConnectorId, outgoingNodeId: ConnectorId) {
-        if (incomingNodeId.equals(outgoingNodeId)) {
-            throw new Error("An edge cannot connect a node to itself");
-        }
-
-        this.incomingConnectorId = incomingNodeId;
-        this.outgoingConnectorId = outgoingNodeId;
+  constructor(source: ConnectorId, target: ConnectorId) {
+    if (source.equals(target)) {
+      throw new Error("An edge cannot connect a node to itself");
     }
 
-    setActive(active: boolean) {
-        this.isActive = active;
-    }
+    this.sourceId = source;
+    this.targetId = target;
+  }
 
-    isActivated = (): boolean =>  this.isActive;
+  setActive(active: boolean) {
+    this.isActive = active;
+  }
+
+  isActivated = (): boolean => this.isActive;
 }

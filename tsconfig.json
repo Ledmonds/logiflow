@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "types": ["jest", "node"]    // for Jest globals
+    "types": ["jest", "node"] // for Jest globals
   },
-  "include": ["src", "tests"]     // make sure your test folder is included
+  "include": ["src", "tests"] // make sure your test folder is included
 }

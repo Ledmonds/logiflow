@@ -4,48 +4,47 @@ import { IReadOnlyDictionary } from "./IReadOnlyDictionary";
 import { TryGetResponse } from "./TryGetResponse";
 
 export class Dictionary<TKey extends IEquatiable<TKey>, TItem>
-    implements IDictionary<TKey, TItem>,
-    IReadOnlyDictionary<TKey, TItem>
+  implements IDictionary<TKey, TItem>, IReadOnlyDictionary<TKey, TItem>
 {
-    private map: Map<string, TItem> = new Map();
+  private map: Map<string, TItem> = new Map();
 
-    public tryGet(key: TKey): TryGetResponse<TItem> {
-        var hash = key.hash();
-        var item = this.map.get(hash);
+  public asReadOnly(): TItem[] {
+    return [...this.map.values()];
+  }
 
-        return item == undefined
-            ? TryGetResponse.failed()
-            : TryGetResponse.success(item);
+  public tryGet(key: TKey): TryGetResponse<TItem> {
+    var hash = key.hash();
+    var item = this.map.get(hash);
+
+    return item == undefined
+      ? TryGetResponse.failed()
+      : TryGetResponse.success(item);
+  }
+
+  public add(key: TKey, item: TItem): void {
+    var hash = key.hash();
+    if (this.map.get(hash) != undefined) {
+      throw new Error("the key already exists in the dictionary");
     }
 
-    public add(key: TKey, item: TItem): void
-    {
-        var hash = key.hash();
-        if (this.map.get(hash) != undefined)
-        {
-            throw new Error("the key already exists in the dictionary");
-        }
+    this.map.set(hash, item);
+  }
 
-        this.map.set(hash, item);
+  public get(key: TKey): TItem {
+    var item = this.map.get(key.hash());
+
+    if (item == null || item == undefined) {
+      throw new Error("no item exists with the given key");
     }
 
-    public get(key: TKey): TItem {
-        var item = this.map.get(key.hash());
+    return item;
+  }
 
-        if (item == null || item == undefined)
-        {
-            throw new Error("no item exists with the given key");
-        }
+  public remove(key: TKey): void {
+    this.map.delete(key.hash());
+  }
 
-        return item;
-    }
-
-    public remove(key: TKey): void {
-        this.map.delete(key.hash());
-    }
-
-    public update(key: TKey, item: TItem): void
-    {
-        this.map.set(key.hash(), item);
-    }
+  public update(key: TKey, item: TItem): void {
+    this.map.set(key.hash(), item);
+  }
 }
