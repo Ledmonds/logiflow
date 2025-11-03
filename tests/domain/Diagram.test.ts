@@ -25,7 +25,7 @@ describe("Diagram", () => {
     diagram.addNode(toggle);
     diagram.addNode(notGate);
 
-    diagram.connectGates(toggle.output, notGate.input);
+    diagram.connectGates(toggle.output, notGate.inputs[0]);
 
     diagram.simulate();
 
@@ -45,9 +45,9 @@ describe("Diagram", () => {
     diagram.addNode(firstNotGate);
     diagram.addNode(secondNotGate);
 
-    diagram.connectGates(toggle.output, buffer.input);
-    diagram.connectGates(buffer.output, firstNotGate.input);
-    diagram.connectGates(firstNotGate.output, secondNotGate.input);
+    diagram.connectGates(toggle.output, buffer.inputs[0]);
+    diagram.connectGates(buffer.output, firstNotGate.inputs[0]);
+    diagram.connectGates(firstNotGate.output, secondNotGate.inputs[0]);
 
     diagram.simulate();
 
@@ -68,8 +68,8 @@ describe("Diagram", () => {
     diagram.addNode(toggleB);
     diagram.addNode(and);
 
-    diagram.connectGates(toggleA.output, and.inputA);
-    diagram.connectGates(toggleB.output, and.inputB);
+    diagram.connectGates(toggleA.output, and.inputs[0]);
+    diagram.connectGates(toggleB.output, and.inputs[1]);
 
     diagram.simulate();
 

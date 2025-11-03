@@ -1,17 +1,14 @@
 import { Dictionary } from "../common/dictionary";
 import { Edge } from "./edge";
 import { IDictionary } from "../common/dictionary.interface";
-import { ILogicGate } from "./gates/logicGate.interface";
-import { Toggle } from "./gates/toggle";
 import { TryGetResponse } from "../common/tryGetResponse";
 import { INode } from "./gates/node.interface";
 import { IQueue } from "../common/queue.interface";
 import { Queue } from "../common/queue";
-import { SingleInputGate } from "./gates/singleInputGate";
 import { NodeId } from "../common/ids/logicGateId";
 import { ConnectorId } from "../common/ids/connectorId";
-import { DualInputLogicGate } from "./gates/dualInputLogicGate";
 import { Connector } from "./connector";
+import { LogicGate } from "./gates/logicGate";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<
@@ -19,10 +16,7 @@ export class Diagram {
     INode
   >();
   private edges: Edge[] = [];
-  private nodes: IDictionary<NodeId, ILogicGate> = new Dictionary<
-    NodeId,
-    ILogicGate
-  >();
+  private nodes: IDictionary<NodeId, INode> = new Dictionary<NodeId, INode>();
   private simulationQueue: IQueue<INode> = new Queue<INode>();
 
   public getNodeByConnectorId(connectorId: ConnectorId): TryGetResponse<INode> {
@@ -35,22 +29,13 @@ export class Diagram {
   }
 
   // has GB overhead through creating a new collection - consider something like a readonly wrapper for Array
-  public getGates(): ILogicGate[] {
+  public getNode(): INode[] {
     return this.nodes.asReadOnly();
   }
 
   private tryGetNode(id: NodeId): TryGetResponse<INode> {
     var toggle = this.nodes.tryGet(id);
-    if (toggle.result) {
-      return toggle;
-    }
-
-    var node = this.nodes.tryGet(id);
-    if (node.result) {
-      return node;
-    }
-
-    return TryGetResponse.failed();
+    return toggle.result ? toggle : TryGetResponse.failed();
   }
 
   public connectGates(source: Connector, target: Connector) {
@@ -64,19 +49,18 @@ export class Diagram {
     }
   }
 
-  public addNode(node: ILogicGate) {
+  public addNode(node: INode) {
     this.nodes.add(node.id, node);
 
-    if (node.nodeType == SingleInputGate.kind) {
-      this.connectors.add((node as SingleInputGate).input.id, node);
-      this.connectors.add((node as SingleInputGate).output.id, node);
-    } else if (node.nodeType == DualInputLogicGate.kind) {
-      this.connectors.add((node as DualInputLogicGate).inputA.id, node);
-      this.connectors.add((node as DualInputLogicGate).inputB.id, node);
-      this.connectors.add((node as DualInputLogicGate).output.id, node);
-    } else if (node.nodeType == Toggle.kind) {
-      this.connectors.add((node as Toggle).output.id, node);
+    if (node instanceof LogicGate) {
+      const logicGate = node as LogicGate;
+
+      for (var i = 0; i < logicGate.inputs.length; ++i) {
+        this.connectors.add(logicGate.inputs[i].id, logicGate);
+      }
     }
+
+    this.connectors.add(node.output.id, node);
   }
 
   public simulate() {
@@ -95,13 +79,9 @@ export class Diagram {
 
       var targetNode = this.connectors.get(edge.item!.targetId);
 
-      if (targetNode.nodeType == SingleInputGate.kind) {
-        (targetNode as SingleInputGate).setInput(evaluation);
-      } else if (targetNode.nodeType == DualInputLogicGate.kind) {
-        (targetNode as DualInputLogicGate).setInput(
-          edge.item!.targetId,
-          evaluation
-        );
+      if (targetNode instanceof LogicGate) {
+        const logicGate = targetNode as LogicGate;
+        logicGate.setInput(edge.item!.targetId, evaluation);
       }
 
       if (targetNode.isEvaluatable()) {

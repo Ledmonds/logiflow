@@ -1,9 +1,9 @@
-import { SingleInputGate } from "./singleInputGate";
+import { SingleInputLogicGate } from "./singleInputLogicGate";
 
-export class BufferGate extends SingleInputGate {
+export class BufferGate extends SingleInputLogicGate {
   public nodeName: string = "bufferGate";
 
   evaluate(): boolean | null {
-    return this.isEvaluatable() ? this.input.isActive() : null;
+    return this.isEvaluatable() ? this._input.isActive() : null;
   }
 }

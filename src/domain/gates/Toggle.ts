@@ -2,9 +2,9 @@ import { NodeId } from "../../common/ids/logicGateId";
 import { CreateId } from "../../common/services/idFactory";
 import { Connector } from "../connector";
 import { Position } from "../position";
-import { ILogicGate } from "./logicGate.interface";
+import { INode } from "./node.interface";
 
-export class Toggle implements ILogicGate {
+export class Toggle implements INode {
   private active: boolean = true;
   public readonly position: Position;
   public static kind: string = "toggle";

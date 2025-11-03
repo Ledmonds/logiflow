@@ -15,8 +15,8 @@ diagram.addNode(toggleB);
 diagram.addNode(notGate);
 diagram.addNode(andGate);
 
-diagram.connectGates(toggleA.output, notGate.input);
-diagram.connectGates(notGate.output, andGate.inputA);
-diagram.connectGates(toggleB.output, andGate.inputB);
+diagram.connectGates(toggleA.output, notGate.inputs[0]);
+diagram.connectGates(notGate.output, andGate.inputs[0]);
+diagram.connectGates(toggleB.output, andGate.inputs[1]);
 
 export const initialDiagram = diagram;

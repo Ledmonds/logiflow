@@ -16,7 +16,7 @@ export function ConvertEdges(diagram: Diagram): any[] {
 }
 
 export default function ConvertNodes(diagram: Diagram): any[] {
-  return diagram.getGates().map((gate) => {
+  return diagram.getNode().map((gate) => {
     return {
       id: gate.id.Id,
       type: gate.nodeName,

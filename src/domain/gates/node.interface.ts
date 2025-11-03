@@ -4,7 +4,6 @@ import { Position } from "../position";
 
 export interface INode {
   id: NodeId;
-  nodeType: string;
   nodeName: string;
   output: Connector;
   position: Position;
