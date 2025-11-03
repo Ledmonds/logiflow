@@ -1,3 +1,3 @@
-import { INode } from "./INode";
+import { INode } from "./node.interface";
 
 export interface ILogicGate extends INode {}

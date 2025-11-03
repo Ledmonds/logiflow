@@ -1,4 +1,4 @@
-import { DualInputLogicGate } from "./DualInputLogicGate";
+import { DualInputLogicGate } from "./dualInputLogicGate";
 
 export class AndGate extends DualInputLogicGate {
   public nodeName: string = "andGate";

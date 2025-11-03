@@ -3,9 +3,9 @@ import { ReactFlow, Background, Controls, MiniMap } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 import useStore from "./store";
-import ToggleNode from "./gates/ToggleNode";
-import NotGateNode from "./gates/NotGate";
-import AndGateNode from "./gates/AndGate";
+import ToggleNode from "./gates/toggleNode";
+import NotGateNode from "./gates/notGate";
+import AndGateNode from "./gates/andGate";
 
 const selector = (state: any) => ({
   diagram: state.diagram,

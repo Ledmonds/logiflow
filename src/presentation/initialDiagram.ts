@@ -1,6 +1,6 @@
-import { Diagram } from "../domain/Diagram";
-import { NotGate } from "../domain/gates/NotGate";
-import { Toggle } from "../domain/gates/Toggle";
+import { Diagram } from "../domain/diagram";
+import { NotGate } from "../domain/gates/notGate";
+import { Toggle } from "../domain/gates/toggle";
 
 var diagram = new Diagram();
 

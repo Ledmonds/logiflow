@@ -1,4 +1,4 @@
-import { Queue } from "../../src/common/Queue";
+import { Queue } from "../../src/common/queue";
 
 describe("Queue", () => {
   it("enqueue adds an item to the queue", () => {

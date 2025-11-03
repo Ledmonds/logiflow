@@ -6,10 +6,10 @@ import {
   type OnConnect,
   BuiltInNode,
 } from "@xyflow/react";
-import { Toggle } from "../domain/gates/Toggle";
-import { NotGate } from "../domain/gates/NotGate";
-import { AndGate } from "../domain/gates/AndGate";
-import { Diagram } from "../domain/Diagram";
+import { Toggle } from "../domain/gates/toggle";
+import { NotGate } from "../domain/gates/notGate";
+import { AndGate } from "../domain/gates/andGate";
+import { Diagram } from "../domain/diagram";
 
 export type ToggleNode = Node<
   {

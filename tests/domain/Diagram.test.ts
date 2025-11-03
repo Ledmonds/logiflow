@@ -1,8 +1,8 @@
-import { Diagram } from "../../src/domain/Diagram";
-import { AndGate } from "../../src/domain/gates/AndGate";
-import { BufferGate } from "../../src/domain/gates/BufferGate";
-import { NotGate } from "../../src/domain/gates/NotGate";
-import { Toggle } from "../../src/domain/gates/Toggle";
+import { Diagram } from "../../src/domain/diagram";
+import { AndGate } from "../../src/domain/gates/andGate";
+import { BufferGate } from "../../src/domain/gates/bufferGate";
+import { NotGate } from "../../src/domain/gates/notGate";
+import { Toggle } from "../../src/domain/gates/toggle";
 
 describe("Diagram", () => {
   it("simple toggle test", () => {

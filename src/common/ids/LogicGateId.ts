@@ -1,6 +1,6 @@
-import { Id } from './Id';
+import { Id } from "./id";
 
 export class NodeId extends Id {
-    // weirdly required to force nominal type checking in typescript
-    private _brand!: "NodeId";
+  // weirdly required to force nominal type checking in typescript
+  private _brand!: "NodeId";
 }

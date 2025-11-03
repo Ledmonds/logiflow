@@ -1,6 +1,6 @@
-import { AndGate } from "../../../src/domain/gates/AndGate";
+import { AndGate } from "../../../src/domain/gates/andGate";
 
-describe('AndGate logically ANDs inputs', () => {
+describe("AndGate logically ANDs inputs", () => {
   test.each([
     [false, false, false],
     [false, true, false],
@@ -9,8 +9,8 @@ describe('AndGate logically ANDs inputs', () => {
     [null, false, null],
     [false, null, null],
     [null, true, null],
-    [true, null, null]
-  ])('evaluate(%s) should return %s', (inputA, inputB, expected) => {
+    [true, null, null],
+  ])("evaluate(%s) should return %s", (inputA, inputB, expected) => {
     const gate = new AndGate();
     gate.setInput(gate.inputA.id, inputA);
     gate.setInput(gate.inputB.id, inputB);

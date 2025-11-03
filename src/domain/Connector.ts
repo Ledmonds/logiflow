@@ -1,20 +1,19 @@
-import { ConnectorId } from '../common/ids/ConnectorId';
-import { CreateId } from '../common/services/IdFactory';
+import { ConnectorId } from "../common/ids/connectorId";
+import { CreateId } from "../common/services/idFactory";
 
 export class Connector {
-    private _active: boolean | null = null; 
-    public readonly id: ConnectorId = CreateId(ConnectorId);
-    
-    public isActive(): boolean | null
-    {
-        return this._active;
-    }
+  private _active: boolean | null = null;
+  public readonly id: ConnectorId = CreateId(ConnectorId);
 
-    public isSet(): boolean {
-        return this._active != null;
-    }
+  public isActive(): boolean | null {
+    return this._active;
+  }
 
-    public setActive(active: boolean | null): void {
-        this._active = active;
-    }
+  public isSet(): boolean {
+    return this._active != null;
+  }
+
+  public setActive(active: boolean | null): void {
+    this._active = active;
+  }
 }

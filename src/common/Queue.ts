@@ -1,4 +1,4 @@
-import { IQueue } from "./IQueue";
+import { IQueue } from "./queue.interface";
 
 export class Queue<TItem> implements IQueue<TItem> {
   private queue: TItem[] = [];

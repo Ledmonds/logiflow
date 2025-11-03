@@ -1,7 +1,7 @@
-import { IDictionary } from "./IDictionary";
-import { IEquatiable } from "./IEquatiable";
-import { IReadOnlyDictionary } from "./IReadOnlyDictionary";
-import { TryGetResponse } from "./TryGetResponse";
+import { IDictionary } from "./dictionary.interface";
+import { IEquatiable } from "./equatiable.interface";
+import { IReadOnlyDictionary } from "./readOnlyDictionary.interface";
+import { TryGetResponse } from "./tryGetResponse";
 
 export class Dictionary<TKey extends IEquatiable<TKey>, TItem>
   implements IDictionary<TKey, TItem>, IReadOnlyDictionary<TKey, TItem>

@@ -1,7 +1,7 @@
-import { CreateId } from "../../common/services/IdFactory";
-import { ILogicGate } from "./ILogicGate";
-import { Connector } from "../Connector";
-import { NodeId } from "../../common/ids/LogicGateId";
+import { CreateId } from "../../common/services/idFactory";
+import { ILogicGate } from "./logicGate.interface";
+import { Connector } from "../connector";
+import { NodeId } from "../../common/ids/logicGateId";
 
 export abstract class SingleInputGate implements ILogicGate {
   public static kind: string = "single";

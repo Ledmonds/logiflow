@@ -1,5 +1,5 @@
-import { IEquatiable } from "./IEquatiable";
-import { TryGetResponse } from "./TryGetResponse";
+import { IEquatiable } from "./equatiable.interface";
+import { TryGetResponse } from "./tryGetResponse";
 
 export interface IDictionary<TKey extends IEquatiable<TKey>, TItem> {
   asReadOnly(): TItem[];

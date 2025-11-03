@@ -1,17 +1,17 @@
-import { Dictionary } from "../common/Dictionary";
-import { Edge } from "./Edge";
-import { IDictionary } from "../common/IDictionary";
-import { ILogicGate } from "./gates/ILogicGate";
-import { Toggle } from "./gates/Toggle";
-import { TryGetResponse } from "../common/TryGetResponse";
-import { INode } from "./gates/INode";
-import { IQueue } from "../common/IQueue";
-import { Queue } from "../common/Queue";
-import { SingleInputGate } from "./gates/SingleInputGate";
-import { NodeId } from "../common/ids/LogicGateId";
-import { ConnectorId } from "../common/ids/ConnectorId";
-import { DualInputLogicGate } from "./gates/DualInputLogicGate";
-import { Connector } from "./Connector";
+import { Dictionary } from "../common/dictionary";
+import { Edge } from "./edge";
+import { IDictionary } from "../common/dictionary.interface";
+import { ILogicGate } from "./gates/logicGate.interface";
+import { Toggle } from "./gates/toggle";
+import { TryGetResponse } from "../common/tryGetResponse";
+import { INode } from "./gates/node.interface";
+import { IQueue } from "../common/queue.interface";
+import { Queue } from "../common/queue";
+import { SingleInputGate } from "./gates/singleInputGate";
+import { NodeId } from "../common/ids/logicGateId";
+import { ConnectorId } from "../common/ids/connectorId";
+import { DualInputLogicGate } from "./gates/dualInputLogicGate";
+import { Connector } from "./connector";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<

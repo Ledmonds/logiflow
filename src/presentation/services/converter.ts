@@ -1,4 +1,4 @@
-import { Diagram } from "../../domain/Diagram";
+import { Diagram } from "../../domain/diagram";
 
 export function ConvertEdges(diagram: Diagram): any[] {
   return diagram.getEdges().map((edge) => {

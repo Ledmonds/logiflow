@@ -1,7 +1,7 @@
-import { NodeId } from "../../common/ids/LogicGateId";
-import { CreateId } from "../../common/services/IdFactory";
-import { Connector } from "../Connector";
-import { INode } from "./INode";
+import { NodeId } from "../../common/ids/logicGateId";
+import { CreateId } from "../../common/services/idFactory";
+import { Connector } from "../connector";
+import { INode } from "./node.interface";
 
 export class Toggle implements INode {
   public static kind: string = "toggle";

@@ -1,6 +1,6 @@
-import { ConnectorId } from "../common/ids/ConnectorId";
-import { EdgeId } from "../common/ids/EdgeId";
-import { CreateId } from "../common/services/IdFactory";
+import { ConnectorId } from "../common/ids/connectorId";
+import { EdgeId } from "../common/ids/edgeId";
+import { CreateId } from "../common/services/idFactory";
 
 export class Edge {
   private isActive: boolean = false;

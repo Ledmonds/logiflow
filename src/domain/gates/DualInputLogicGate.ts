@@ -1,8 +1,8 @@
-import { CreateId } from "../../common/services/IdFactory";
-import { ILogicGate } from "./ILogicGate";
-import { Connector } from "../Connector";
-import { NodeId } from "../../common/ids/LogicGateId";
-import { ConnectorId } from "../../common/ids/ConnectorId";
+import { CreateId } from "../../common/services/idFactory";
+import { ILogicGate } from "./logicGate.interface";
+import { Connector } from "../connector";
+import { NodeId } from "../../common/ids/logicGateId";
+import { ConnectorId } from "../../common/ids/connectorId";
 
 export abstract class DualInputLogicGate implements ILogicGate {
   public static kind: string = "dual";

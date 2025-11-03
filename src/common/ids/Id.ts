@@ -1,4 +1,4 @@
-import { IEquatiable } from "../IEquatiable";
+import { IEquatiable } from "../equatiable.interface";
 
 export abstract class Id implements IEquatiable<Id> {
   public readonly Id: string;

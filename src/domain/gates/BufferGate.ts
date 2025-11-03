@@ -1,4 +1,4 @@
-import { SingleInputGate } from "./SingleInputGate";
+import { SingleInputGate } from "./singleInputGate";
 
 export class BufferGate extends SingleInputGate {
   public nodeName: string = "bufferGate";

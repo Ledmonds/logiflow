@@ -1,5 +1,5 @@
-import { NodeId } from "../../common/ids/LogicGateId";
-import { Connector } from "../Connector";
+import { NodeId } from "../../common/ids/logicGateId";
+import { Connector } from "../connector";
 
 export interface INode {
   id: NodeId;
