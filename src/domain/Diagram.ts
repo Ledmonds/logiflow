@@ -99,7 +99,7 @@ export class Diagram {
         (targetNode as SingleInputGate).setInput(evaluation);
       } else if (targetNode.nodeType == DualInputLogicGate.kind) {
         (targetNode as DualInputLogicGate).setInput(
-          edge.item!.sourceId,
+          edge.item!.targetId,
           evaluation
         );
       }
