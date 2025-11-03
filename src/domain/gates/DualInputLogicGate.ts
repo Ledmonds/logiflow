@@ -3,8 +3,10 @@ import { ILogicGate } from "./logicGate.interface";
 import { Connector } from "../connector";
 import { NodeId } from "../../common/ids/logicGateId";
 import { ConnectorId } from "../../common/ids/connectorId";
+import { Position } from "../position";
 
 export abstract class DualInputLogicGate implements ILogicGate {
+  public readonly position: Position;
   public static kind: string = "dual";
   public nodeType: string = DualInputLogicGate.kind;
   public abstract nodeName: string;
@@ -12,6 +14,10 @@ export abstract class DualInputLogicGate implements ILogicGate {
   public readonly inputA: Connector = new Connector();
   public readonly inputB: Connector = new Connector();
   public readonly output: Connector = new Connector();
+
+  constructor(x: number, y: number) {
+    this.position = new Position(x, y);
+  }
 
   public abstract evaluate(): boolean | null;
 

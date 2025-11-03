@@ -1,14 +1,22 @@
 import { Diagram } from "../domain/diagram";
+import { AndGate } from "../domain/gates/andGate";
 import { NotGate } from "../domain/gates/notGate";
 import { Toggle } from "../domain/gates/toggle";
 
 var diagram = new Diagram();
 
-var toggle = new Toggle();
-var notGate = new NotGate();
+var toggleA = new Toggle(0, 0);
+var toggleB = new Toggle(0, 100);
+var notGate = new NotGate(100, 0);
+var andGate = new AndGate(200, 0);
 
-diagram.addNode(toggle);
+diagram.addNode(toggleA);
+diagram.addNode(toggleB);
 diagram.addNode(notGate);
-diagram.connectGates(toggle.output, notGate.input);
+diagram.addNode(andGate);
+
+diagram.connectGates(toggleA.output, notGate.input);
+diagram.connectGates(notGate.output, andGate.inputA);
+diagram.connectGates(toggleB.output, andGate.inputB);
 
 export const initialDiagram = diagram;

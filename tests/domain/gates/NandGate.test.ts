@@ -11,7 +11,7 @@ describe("NandGate logically NANDs inputs", () => {
     [null, true, null],
     [true, null, null],
   ])("evaluate(%s) should return %s", (inputA, inputB, expected) => {
-    const gate = new NandGate();
+    const gate = new NandGate(0, 0);
     gate.setInput(gate.inputA.id, inputA);
     gate.setInput(gate.inputB.id, inputB);
 

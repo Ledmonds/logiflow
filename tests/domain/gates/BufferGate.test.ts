@@ -6,7 +6,7 @@ describe("BufferGate forwards input", () => {
     [false, false],
     [null, null],
   ])("evaluate(%s) should return %s", (input, expected) => {
-    const gate = new BufferGate();
+    const gate = new BufferGate(0, 0);
     gate.setInput(input);
 
     expect(gate.evaluate()).toBe(expected);

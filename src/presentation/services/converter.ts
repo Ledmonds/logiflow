@@ -5,9 +5,6 @@ export function ConvertEdges(diagram: Diagram): any[] {
     var source = diagram.getNodeByConnectorId(edge.sourceId);
     var target = diagram.getNodeByConnectorId(edge.targetId);
 
-    console.log(source);
-    console.log(target);
-
     return {
       id: edge.id.Id,
       source: source.result ? source.item!.id.Id : null,
@@ -26,7 +23,7 @@ export default function ConvertNodes(diagram: Diagram): any[] {
       data: {
         domain: gate,
       },
-      position: { x: 0, y: 0 },
+      position: { x: gate.position.getX(), y: gate.position.getY() },
     };
   });
 }

@@ -8,7 +8,7 @@ describe("Diagram", () => {
   it("simple toggle test", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle();
+    var toggle = new Toggle(0, 0);
 
     diagram.addNode(toggle);
     diagram.simulate();
@@ -19,8 +19,8 @@ describe("Diagram", () => {
   it("simple not toggle test", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle();
-    var notGate = new NotGate();
+    var toggle = new Toggle(0, 0);
+    var notGate = new NotGate(0, 0);
 
     diagram.addNode(toggle);
     diagram.addNode(notGate);
@@ -35,10 +35,10 @@ describe("Diagram", () => {
   it("toggle, buffer, not, not", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle();
-    var buffer = new BufferGate();
-    var firstNotGate = new NotGate();
-    var secondNotGate = new NotGate();
+    var toggle = new Toggle(0, 0);
+    var buffer = new BufferGate(0, 0);
+    var firstNotGate = new NotGate(0, 0);
+    var secondNotGate = new NotGate(0, 0);
 
     diagram.addNode(toggle);
     diagram.addNode(buffer);
@@ -60,9 +60,9 @@ describe("Diagram", () => {
   it("toggle, toggle, and", () => {
     var diagram = new Diagram();
 
-    var toggleA = new Toggle();
-    var toggleB = new Toggle();
-    var and = new AndGate();
+    var toggleA = new Toggle(0, 0);
+    var toggleB = new Toggle(0, 0);
+    var and = new AndGate(0, 0);
 
     diagram.addNode(toggleA);
     diagram.addNode(toggleB);
