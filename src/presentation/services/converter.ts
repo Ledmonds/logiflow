@@ -10,7 +10,7 @@ export function ConvertEdges(diagram: Diagram): any[] {
       source: source.result ? source.item!.id.Id : null,
       target: target.result ? target.item!.id.Id : null,
       type: "smoothstep",
-      animated: false,
+      animated: edge.isActivated(),
     };
   });
 }

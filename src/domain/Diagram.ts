@@ -10,6 +10,7 @@ import { ConnectorId } from "../common/ids/connectorId";
 import { Connector } from "./connector";
 import { LogicGate } from "./gates/logicGate";
 import { OutputNode } from "./gates/outputNode";
+import { TerminatingNode } from "./gates/terminatingNode";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<
@@ -34,11 +35,6 @@ export class Diagram {
     return this.nodes.asReadOnly();
   }
 
-  private tryGetNode(id: NodeId): TryGetResponse<INode> {
-    const toggle = this.nodes.tryGet(id);
-    return toggle.result ? toggle : TryGetResponse.failed();
-  }
-
   public connectGates(source: Connector, target: Connector) {
     const edge = new Edge(source.id, target.id);
     this.edges.push(edge);
@@ -53,11 +49,9 @@ export class Diagram {
   public addNode(node: INode) {
     this.nodes.add(node.id, node);
 
-    if (node instanceof LogicGate) {
-      const logicGate = node as LogicGate;
-
-      for (var i = 0; i < logicGate.inputs.length; ++i) {
-        this.connectors.add(logicGate.inputs[i].id, logicGate);
+    if (node instanceof LogicGate || node instanceof TerminatingNode) {
+      for (var i = 0; i < node.inputs.length; ++i) {
+        this.connectors.add(node.inputs[i].id, node);
       }
     }
 
@@ -90,9 +84,11 @@ export class Diagram {
 
       const targetNode = this.connectors.get(edge.targetId);
 
-      if (targetNode instanceof LogicGate) {
-        const logicGate = targetNode as LogicGate;
-        logicGate.setInput(edge.targetId, evaluation);
+      if (
+        targetNode instanceof LogicGate ||
+        targetNode instanceof TerminatingNode
+      ) {
+        targetNode.setInput(edge.targetId, evaluation);
       }
 
       if (targetNode.isEvaluatable()) {

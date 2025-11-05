@@ -1,14 +1,15 @@
 import { Diagram } from "../../src/domain/diagram";
 import { AndGate } from "../../src/domain/gates/andGate";
 import { BufferGate } from "../../src/domain/gates/bufferGate";
+import { LightBulbNode } from "../../src/domain/gates/lightBulbNode";
 import { NotGate } from "../../src/domain/gates/notGate";
-import { Toggle } from "../../src/domain/gates/toggle";
+import { ToggleNode } from "../../src/domain/gates/toggleNode";
 
 describe("Diagram", () => {
   it("simple toggle test", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle(0, 0);
+    var toggle = new ToggleNode(0, 0);
 
     diagram.addNode(toggle);
     diagram.simulate();
@@ -16,10 +17,26 @@ describe("Diagram", () => {
     expect(toggle.evaluate()).toBe(true);
   });
 
+  it("toggle, lightBulb", () => {
+    var diagram = new Diagram();
+
+    var toggle = new ToggleNode(0, 0);
+    var lightBulb = new LightBulbNode(0, 0);
+
+    diagram.addNode(toggle);
+    diagram.addNode(lightBulb);
+    diagram.connectGates(toggle.output, lightBulb.inputs[0]);
+
+    diagram.simulate();
+
+    expect(toggle.evaluate()).toBe(true);
+    expect(lightBulb.evaluate()).toBe(true);
+  });
+
   it("simple not toggle test", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle(0, 0);
+    var toggle = new ToggleNode(0, 0);
     var notGate = new NotGate(0, 0);
 
     diagram.addNode(toggle);
@@ -35,7 +52,7 @@ describe("Diagram", () => {
   it("toggle, buffer, not, not", () => {
     var diagram = new Diagram();
 
-    var toggle = new Toggle(0, 0);
+    var toggle = new ToggleNode(0, 0);
     var buffer = new BufferGate(0, 0);
     var firstNotGate = new NotGate(0, 0);
     var secondNotGate = new NotGate(0, 0);
@@ -60,8 +77,8 @@ describe("Diagram", () => {
   it("toggle, toggle, and", () => {
     var diagram = new Diagram();
 
-    var toggleA = new Toggle(0, 0);
-    var toggleB = new Toggle(0, 0);
+    var toggleA = new ToggleNode(0, 0);
+    var toggleB = new ToggleNode(0, 0);
     var and = new AndGate(0, 0);
 
     diagram.addNode(toggleA);

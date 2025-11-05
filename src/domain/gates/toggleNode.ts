@@ -4,12 +4,12 @@ import { Connector } from "../connector";
 import { Position } from "../position";
 import { OutputNode } from "./outputNode";
 
-export class Toggle extends OutputNode {
+export class ToggleNode extends OutputNode {
   private active: boolean = true;
   public readonly position: Position;
   public static kind: string = "toggle";
-  public nodeName: string = Toggle.kind;
-  public nodeType: string = Toggle.kind;
+  public nodeName: string = ToggleNode.kind;
+  public nodeType: string = ToggleNode.kind;
   public readonly id: NodeId = CreateId(NodeId);
   public readonly output: Connector = new Connector();
 

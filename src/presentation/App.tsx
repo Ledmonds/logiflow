@@ -3,9 +3,10 @@ import { ReactFlow, Background, Controls, MiniMap } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 import useStore from "./store";
-import ToggleNode from "./gates/toggleNode";
-import NotGateNode from "./gates/notGate";
-import AndGateNode from "./gates/andGate";
+import Toggle from "./gates/toggleNode";
+import NotGate from "./gates/notGate";
+import AndGate from "./gates/andGate";
+import LightBulb from "./gates/lightBulbNode";
 
 const selector = (state: any) => ({
   diagram: state.diagram,
@@ -17,9 +18,10 @@ const selector = (state: any) => ({
 });
 
 const nodeTypes = {
-  toggle: ToggleNode,
-  notGate: NotGateNode,
-  andGate: AndGateNode,
+  toggle: Toggle,
+  notGate: NotGate,
+  andGate: AndGate,
+  lightBulbNode: LightBulb,
 };
 
 function Flow() {

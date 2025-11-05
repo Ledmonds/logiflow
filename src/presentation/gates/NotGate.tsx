@@ -1,7 +1,7 @@
 import { Handle, type NodeProps, Position } from "@xyflow/react";
-import { type NotGateNode } from "../types";
+import { type NotGateElement } from "../types";
 
-function NotGateNode({ id, data }: NodeProps<NotGateNode>) {
+function NotGate({ id, data }: NodeProps<NotGateElement>) {
   return (
     <div
       style={{
@@ -54,4 +54,4 @@ function NotGateNode({ id, data }: NodeProps<NotGateNode>) {
   );
 }
 
-export default NotGateNode;
+export default NotGate;

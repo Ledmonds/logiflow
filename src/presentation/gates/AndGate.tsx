@@ -1,7 +1,7 @@
 import { Handle, type NodeProps, Position } from "@xyflow/react";
-import { type AndGateNode } from "../types";
+import { type AndGateElement } from "../types";
 
-function AndGateNode({ id, data }: NodeProps<AndGateNode>) {
+function AndGate({ id, data }: NodeProps<AndGateElement>) {
   return (
     <div
       style={{
@@ -49,4 +49,4 @@ function AndGateNode({ id, data }: NodeProps<AndGateNode>) {
   );
 }
 
-export default AndGateNode;
+export default AndGate;

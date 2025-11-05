@@ -1,9 +1,9 @@
 import { Handle, type NodeProps, Position } from "@xyflow/react";
 
 import useStore from "../store";
-import { type ToggleNode } from "../types";
+import { type ToggleNodeElement } from "../types";
 
-function ToggleNode({ id, data }: NodeProps<ToggleNode>) {
+function Toggle({ id, data }: NodeProps<ToggleNodeElement>) {
   const toggleToggleNode = useStore((state) => state.toggleToggleNode);
 
   return (
@@ -32,7 +32,6 @@ function ToggleNode({ id, data }: NodeProps<ToggleNode>) {
           ry="12"
           fill="none"
           stroke="black"
-          strokeWidth="2"
         />
         <circle
           cx={data.domain.evaluate() ? "44" : "22"}
@@ -55,4 +54,4 @@ function ToggleNode({ id, data }: NodeProps<ToggleNode>) {
   );
 }
 
-export default ToggleNode;
+export default Toggle;

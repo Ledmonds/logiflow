@@ -4,35 +4,45 @@ import {
   type OnNodesChange,
   type OnEdgesChange,
   type OnConnect,
-  BuiltInNode,
 } from "@xyflow/react";
-import { Toggle } from "../domain/gates/toggle";
-import { NotGate } from "../domain/gates/notGate";
-import { AndGate } from "../domain/gates/andGate";
-import { Diagram } from "../domain/diagram";
+import { type ToggleNode } from "../domain/gates/toggleNode";
+import { type NotGate } from "../domain/gates/notGate";
+import { type AndGate } from "../domain/gates/andGate";
+import { LightBulbNode } from "../domain/gates/lightBulbNode";
 
-export type ToggleNode = Node<
+export type ToggleNodeElement = Node<
   {
-    domain: Toggle;
+    domain: ToggleNode;
   },
   "toggle"
 >;
 
-export type NotGateNode = Node<
+export type NotGateElement = Node<
   {
     domain: NotGate;
   },
   "notGate"
 >;
 
-export type AndGateNode = Node<
+export type AndGateElement = Node<
   {
     domain: AndGate;
   },
   "andGate"
 >;
 
-export type AppNode = AndGateNode | ToggleNode | NotGateNode;
+export type LightBulbNodeElement = Node<
+  {
+    domain: LightBulbNode;
+  },
+  "lightBulbNode"
+>;
+
+export type AppNode =
+  | AndGateElement
+  | ToggleNodeElement
+  | NotGateElement
+  | LightBulbNodeElement;
 
 export type AppState = {
   edges: Edge[];

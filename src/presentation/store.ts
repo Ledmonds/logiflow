@@ -7,11 +7,11 @@ import {
 } from "@xyflow/react";
 
 import { initialDiagram } from "./initialDiagram";
-import { AppNode, ToggleNode, type AppState } from "./types";
+import { AppNode, ToggleNodeElement, type AppState } from "./types";
 import ConvertNodes, { ConvertEdges } from "./services/converter";
 
-function isToggleNode(node: AppNode): node is ToggleNode {
-  return node.type === "toggleNode";
+function isToggleNode(node: AppNode): node is ToggleNodeElement {
+  return true;
 }
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
