@@ -3,16 +3,17 @@ import { Connector } from "../connector";
 import { NodeId } from "../../common/ids/logicGateId";
 import { ConnectorId } from "../../common/ids/connectorId";
 import { Position } from "../position";
-import { INode } from "./node.interface";
+import { OutputNode } from "./outputNode";
 
-export abstract class LogicGate implements INode {
+export abstract class LogicGate extends OutputNode {
   public readonly position: Position;
-  public abstract nodeName: string;
+  public abstract readonly nodeName: string;
   public readonly id: NodeId = CreateId(NodeId);
-  abstract inputs: Connector[];
-  public readonly output: Connector = new Connector();
+  public abstract readonly inputs: Connector[];
 
-  constructor(x: number, y: number) {
+  public constructor(x: number, y: number) {
+    super();
+
     this.position = new Position(x, y);
   }
 

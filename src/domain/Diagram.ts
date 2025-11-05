@@ -9,6 +9,7 @@ import { NodeId } from "../common/ids/logicGateId";
 import { ConnectorId } from "../common/ids/connectorId";
 import { Connector } from "./connector";
 import { LogicGate } from "./gates/logicGate";
+import { OutputNode } from "./gates/outputNode";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<
@@ -34,15 +35,15 @@ export class Diagram {
   }
 
   private tryGetNode(id: NodeId): TryGetResponse<INode> {
-    var toggle = this.nodes.tryGet(id);
+    const toggle = this.nodes.tryGet(id);
     return toggle.result ? toggle : TryGetResponse.failed();
   }
 
   public connectGates(source: Connector, target: Connector) {
-    var edge = new Edge(source.id, target.id);
+    const edge = new Edge(source.id, target.id);
     this.edges.push(edge);
 
-    var sourceNode = this.connectors.get(source.id);
+    const sourceNode = this.connectors.get(source.id);
 
     if (sourceNode.isEvaluatable()) {
       this.simulationQueue.enqueue(sourceNode);
@@ -60,28 +61,38 @@ export class Diagram {
       }
     }
 
-    this.connectors.add(node.output.id, node);
+    if (node instanceof OutputNode) {
+      this.connectors.add(node.output.id, node);
+    }
   }
 
   public simulate() {
     while (!this.simulationQueue.isEmpty()) {
-      var sourceNode = this.simulationQueue.dequeue();
+      const sourceNode = this.simulationQueue.dequeue();
 
-      var evaluation = sourceNode.evaluate()!;
-      var edge = this.tryGetEdge(sourceNode.output.id);
+      const evaluation = sourceNode.evaluate()!;
 
-      // We have hit a node without an outgoing edge, simulation cannot continue on this path
-      if (!edge.result) {
+      // node with no outputs, and therefore cannot simulate further
+      if (!(sourceNode instanceof OutputNode)) {
         continue;
       }
 
-      edge.item!.setActive(evaluation);
+      const edgeResult = this.tryGetEdge(sourceNode.output.id);
 
-      var targetNode = this.connectors.get(edge.item!.targetId);
+      // node without an outgoing edge, simulation cannot continue
+      if (!edgeResult.result) {
+        continue;
+      }
+
+      const edge = edgeResult.item!;
+
+      edge.setActive(evaluation);
+
+      const targetNode = this.connectors.get(edge.targetId);
 
       if (targetNode instanceof LogicGate) {
         const logicGate = targetNode as LogicGate;
-        logicGate.setInput(edge.item!.targetId, evaluation);
+        logicGate.setInput(edge.targetId, evaluation);
       }
 
       if (targetNode.isEvaluatable()) {
@@ -91,7 +102,7 @@ export class Diagram {
   }
 
   private tryGetEdge(nodeId: ConnectorId): TryGetResponse<Edge> {
-    var edge = this.edges.find(
+    const edge = this.edges.find(
       (edge) => edge.sourceId.equals(nodeId) || edge.targetId.equals(nodeId)
     );
 
