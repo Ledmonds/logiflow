@@ -7,6 +7,7 @@ import Toggle from "./gates/toggleNode";
 import NotGate from "./gates/notGate";
 import AndGate from "./gates/andGate";
 import LightBulb from "./gates/lightBulbNode";
+import XorGate from "./gates/xorGate";
 
 const selector = (state: any) => ({
   diagram: state.diagram,
@@ -21,6 +22,7 @@ const nodeTypes = {
   toggle: Toggle,
   notGate: NotGate,
   andGate: AndGate,
+  xorGate: XorGate,
   lightBulbNode: LightBulb,
 };
 
