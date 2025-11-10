@@ -11,6 +11,7 @@ import { Connector } from "./connector";
 import { LogicGate } from "./gates/logicGate";
 import { OutputNode } from "./gates/outputNode";
 import { TerminatingNode } from "./gates/terminatingNode";
+import { ToggleNode } from "./gates/toggleNode";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<
@@ -31,8 +32,22 @@ export class Diagram {
   }
 
   // has GB overhead through creating a new collection - consider something like a readonly wrapper for Array
-  public getNode(): INode[] {
+  public getNodes(): INode[] {
     return this.nodes.asReadOnly();
+  }
+
+  public getNode(id: NodeId): INode {
+    return this.nodes.get(id);
+  }
+
+  public toggle(id: NodeId) {
+    const toggle = this.nodes.get(id);
+
+    if (toggle instanceof ToggleNode) {
+      toggle.toggle();
+      this.simulationQueue.enqueue(toggle);
+      this.simulate();
+    }
   }
 
   public connectGates(source: Connector, target: Connector) {
@@ -44,6 +59,8 @@ export class Diagram {
     if (sourceNode.isEvaluatable()) {
       this.simulationQueue.enqueue(sourceNode);
     }
+
+    this.simulate();
   }
 
   public addNode(node: INode) {
@@ -60,7 +77,7 @@ export class Diagram {
     }
   }
 
-  public simulate() {
+  private simulate() {
     while (!this.simulationQueue.isEmpty()) {
       const sourceNode = this.simulationQueue.dequeue();
 

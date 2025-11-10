@@ -4,11 +4,13 @@ import {
   applyNodeChanges,
   applyEdgeChanges,
   isNode,
+  NodePositionChange,
 } from "@xyflow/react";
 
 import { initialDiagram } from "./initialDiagram";
 import { AppNode, ToggleNodeElement, type AppState } from "./types";
 import ConvertNodes, { ConvertEdges } from "./services/converter";
+import { NodeId } from "../common/ids/logicGateId";
 
 function isToggleNode(node: AppNode): node is ToggleNodeElement {
   return true;
@@ -18,7 +20,20 @@ function isToggleNode(node: AppNode): node is ToggleNodeElement {
 const useStore = create<AppState>((set, get) => ({
   edges: ConvertEdges(initialDiagram),
   nodes: ConvertNodes(initialDiagram),
+  diagram: initialDiagram,
+
   onNodesChange: (changes) => {
+    for (var i = 0; i < changes.length; ++i) {
+      if (changes[i].type === "position") {
+        const positionChange = changes[i] as NodePositionChange;
+        const node = initialDiagram.getNode(new NodeId(positionChange.id));
+        node.position.setPosition(
+          positionChange.position!.x,
+          positionChange.position!.y
+        );
+      }
+    }
+
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     });
@@ -40,31 +55,10 @@ const useStore = create<AppState>((set, get) => ({
     set({ edges });
   },
   toggleToggleNode: (nodeId) => {
-    const { nodes, edges } = get();
-    var activeEdge = false;
+    initialDiagram.toggle(new NodeId(nodeId));
 
-    // Update nodes
-    const updatedNodes = nodes.map((node) => {
-      if (node.id === nodeId && isToggleNode(node)) {
-        node.data.domain.toggle();
-        activeEdge = node.data.domain.evaluate();
-
-        return { ...node, data: { ...node.data } };
-      }
-      return node;
-    });
-
-    const connectedEdge = edges.filter((e) => e.source === nodeId);
-
-    const updatedEdges = edges.map((edge) => {
-      if (connectedEdge.includes(edge)) {
-        return {
-          ...edge,
-          animated: activeEdge,
-        };
-      }
-      return edge;
-    });
+    const updatedNodes = ConvertNodes(initialDiagram);
+    const updatedEdges = ConvertEdges(initialDiagram);
 
     set({
       nodes: updatedNodes,

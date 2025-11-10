@@ -6,13 +6,23 @@ import { NotGate } from "../../src/domain/gates/notGate";
 import { ToggleNode } from "../../src/domain/gates/toggleNode";
 
 describe("Diagram", () => {
+  it("toggle changes the toggles state", () => {
+    var diagram = new Diagram();
+
+    var toggle = new ToggleNode(0, 0);
+
+    diagram.addNode(toggle);
+    diagram.toggle(toggle.id);
+
+    expect(toggle.evaluate()).toBe(false);
+  });
+
   it("simple toggle test", () => {
     var diagram = new Diagram();
 
     var toggle = new ToggleNode(0, 0);
 
     diagram.addNode(toggle);
-    diagram.simulate();
 
     expect(toggle.evaluate()).toBe(true);
   });
@@ -26,8 +36,6 @@ describe("Diagram", () => {
     diagram.addNode(toggle);
     diagram.addNode(lightBulb);
     diagram.connectGates(toggle.output, lightBulb.inputs[0]);
-
-    diagram.simulate();
 
     expect(toggle.evaluate()).toBe(true);
     expect(lightBulb.evaluate()).toBe(true);
@@ -43,8 +51,6 @@ describe("Diagram", () => {
     diagram.addNode(notGate);
 
     diagram.connectGates(toggle.output, notGate.inputs[0]);
-
-    diagram.simulate();
 
     expect(toggle.evaluate()).toBe(true);
   });
@@ -66,8 +72,6 @@ describe("Diagram", () => {
     diagram.connectGates(buffer.output, firstNotGate.inputs[0]);
     diagram.connectGates(firstNotGate.output, secondNotGate.inputs[0]);
 
-    diagram.simulate();
-
     expect(toggle.evaluate()).toBe(true);
     expect(buffer.evaluate()).toBe(true);
     expect(firstNotGate.evaluate()).toBe(false);
@@ -87,8 +91,6 @@ describe("Diagram", () => {
 
     diagram.connectGates(toggleA.output, and.inputs[0]);
     diagram.connectGates(toggleB.output, and.inputs[1]);
-
-    diagram.simulate();
 
     expect(toggleA.evaluate()).toBe(true);
     expect(toggleB.evaluate()).toBe(true);
