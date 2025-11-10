@@ -10,6 +10,7 @@ import { type NotGate } from "../domain/gates/notGate";
 import { type AndGate } from "../domain/gates/andGate";
 import { LightBulbNode } from "../domain/gates/lightBulbNode";
 import { XorGate } from "../domain/gates/xorGate";
+import { OrGate } from "../domain/gates/orGate";
 
 export type ToggleNodeElement = Node<
   {
@@ -39,6 +40,13 @@ export type XorGateElement = Node<
   "xorGate"
 >;
 
+export type OrGateElement = Node<
+  {
+    domain: OrGate;
+  },
+  "orGate"
+>;
+
 export type LightBulbNodeElement = Node<
   {
     domain: LightBulbNode;
@@ -49,6 +57,7 @@ export type LightBulbNodeElement = Node<
 export type AppNode =
   | AndGateElement
   | XorGateElement
+  | OrGate
   | ToggleNodeElement
   | NotGateElement
   | LightBulbNodeElement;

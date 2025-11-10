@@ -8,6 +8,7 @@ import NotGate from "./gates/notGate";
 import AndGate from "./gates/andGate";
 import LightBulb from "./gates/lightBulbNode";
 import XorGate from "./gates/xorGate";
+import OrGate from "./gates/orGate";
 
 const selector = (state: any) => ({
   diagram: state.diagram,
@@ -23,6 +24,7 @@ const nodeTypes = {
   notGate: NotGate,
   andGate: AndGate,
   xorGate: XorGate,
+  orGate: OrGate,
   lightBulbNode: LightBulb,
 };
 

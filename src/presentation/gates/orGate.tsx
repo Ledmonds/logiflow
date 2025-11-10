@@ -1,7 +1,7 @@
 import { Handle, type NodeProps, Position } from "@xyflow/react";
-import { XorGateElement } from "../types";
+import { OrGateElement } from "../types";
 
-function XorGate({ id, data }: NodeProps<XorGateElement>) {
+function OrGate({ id, data }: NodeProps<OrGateElement>) {
   return (
     <div
       style={{
@@ -19,28 +19,20 @@ function XorGate({ id, data }: NodeProps<XorGateElement>) {
         height="50"
         viewBox="0 0 64 64"
       >
-        {/* XOR gate body (curved front like AND gate) */}
+        {/* Outer OR gate curve */}
         <path
-          d="M14 10 L30 10 A22 22 0 0 1 30 54 L14 54 Z"
-          fill="none"
-          stroke="black"
-          strokeWidth="2"
-        />
-
-        {/* Extra XOR curve at input side */}
-        <path
-          d="M10 10 Q22 32 10 54"
+          d="M10 10 Q40 10 54 32 Q40 54 10 54 Q22 32 10 10 Z"
           fill="none"
           stroke="black"
           strokeWidth="2"
         />
 
         {/* Input lines */}
-        <line x1="0" y1="20" x2="14" y2="20" stroke="black" strokeWidth="2" />
-        <line x1="0" y1="44" x2="14" y2="44" stroke="black" strokeWidth="2" />
+        <line x1="0" y1="20" x2="10" y2="20" stroke="black" strokeWidth="2" />
+        <line x1="0" y1="44" x2="10" y2="44" stroke="black" strokeWidth="2" />
 
         {/* Output line */}
-        <line x1="52" y1="32" x2="64" y2="32" stroke="black" strokeWidth="2" />
+        <line x1="54" y1="32" x2="64" y2="32" stroke="black" strokeWidth="2" />
       </svg>
 
       {/* Input A */}
@@ -65,4 +57,4 @@ function XorGate({ id, data }: NodeProps<XorGateElement>) {
   );
 }
 
-export default XorGate;
+export default OrGate;
