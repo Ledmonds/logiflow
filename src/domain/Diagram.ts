@@ -104,39 +104,31 @@ export class Diagram {
         continue;
       }
 
-      const edgeResult = this.tryGetEdge(sourceNode.output.id);
+      const edges = this.getEdgesBy(sourceNode.output.id);
 
-      // node without an outgoing edge, simulation cannot continue
-      if (!edgeResult.result) {
-        continue;
-      }
+      for (var i = 0; i < edges.length; ++i) {
+        const edge = edges[i];
+        edge.setActive(evaluation);
 
-      const edge = edgeResult.item!;
+        const targetNode = this.connectors.get(edge.targetId);
 
-      edge.setActive(evaluation);
+        if (
+          targetNode instanceof LogicGate ||
+          targetNode instanceof TerminatingNode
+        ) {
+          targetNode.setInput(edge.targetId, evaluation);
+        }
 
-      const targetNode = this.connectors.get(edge.targetId);
-
-      if (
-        targetNode instanceof LogicGate ||
-        targetNode instanceof TerminatingNode
-      ) {
-        targetNode.setInput(edge.targetId, evaluation);
-      }
-
-      if (targetNode.isEvaluatable()) {
-        this.simulationQueue.enqueue(targetNode);
+        if (targetNode.isEvaluatable()) {
+          this.simulationQueue.enqueue(targetNode);
+        }
       }
     }
   }
 
-  private tryGetEdge(nodeId: ConnectorId): TryGetResponse<Edge> {
-    const edge = this.edges.find(
+  private getEdgesBy(nodeId: ConnectorId): Edge[] {
+    return this.edges.filter(
       (edge) => edge.sourceId.equals(nodeId) || edge.targetId.equals(nodeId)
     );
-
-    return edge == undefined
-      ? TryGetResponse.failed()
-      : TryGetResponse.success(edge);
   }
 }

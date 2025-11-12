@@ -6,6 +6,20 @@ import { NotGate } from "../../src/domain/gates/notGate";
 import { ToggleNode } from "../../src/domain/gates/toggleNode";
 
 describe("Diagram", () => {
+  it("a toggle with multiple connected outgoing edges all have the same state", () => {
+    var diagram = new Diagram();
+
+    var toggle = new ToggleNode(0, 0);
+    var andGate = new AndGate(0, 0);
+
+    diagram.addNode(toggle);
+    diagram.addNode(andGate);
+    diagram.connectGates(toggle.output, andGate.inputs[0]);
+    diagram.connectGates(toggle.output, andGate.inputs[1]);
+
+    expect(andGate.evaluate()).toBe(true);
+  });
+
   it("toggle changes the toggles state", () => {
     var diagram = new Diagram();
 

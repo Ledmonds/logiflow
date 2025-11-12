@@ -26,6 +26,4 @@ diagram.connectGates(notGateB.output, andGate.inputs[0]);
 diagram.connectGates(toggleB.output, andGate.inputs[1]);
 diagram.connectGates(andGate.output, lightBulbNode.inputs[0]);
 
-console.log(diagram);
-
 export const initialDiagram = diagram;
