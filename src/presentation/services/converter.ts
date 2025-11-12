@@ -2,13 +2,29 @@ import { Diagram } from "../../domain/diagram";
 
 export function ConvertEdges(diagram: Diagram): any[] {
   return diagram.getEdges().map((edge) => {
-    var source = diagram.getNodeByConnectorId(edge.sourceId);
-    var target = diagram.getNodeByConnectorId(edge.targetId);
+    const edgeNodeMapping = diagram.getEdgeNodeMapping(edge.id);
+
+    var targetHandle;
+    switch (edgeNodeMapping.targetHandle) {
+      case 0: {
+        targetHandle = "inputA";
+        break;
+      }
+      case 1: {
+        targetHandle = "inputB";
+        break;
+      }
+      default: {
+        targetHandle = null;
+        break;
+      }
+    }
 
     return {
       id: edge.id.Id,
-      source: source.result ? source.item!.id.Id : null,
-      target: target.result ? target.item!.id.Id : null,
+      source: edgeNodeMapping.sourceNodeId?.Id,
+      target: edgeNodeMapping.targetNodeId?.Id,
+      targetHandle: targetHandle,
       type: "smoothstep",
       animated: edge.isActivated(),
     };

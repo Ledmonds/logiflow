@@ -12,6 +12,9 @@ import { LogicGate } from "./gates/logicGate";
 import { OutputNode } from "./gates/outputNode";
 import { TerminatingNode } from "./gates/terminatingNode";
 import { ToggleNode } from "./gates/toggleNode";
+import { EdgeId } from "../common/ids/edgeId";
+import { DualInputLogicGate } from "./gates/dualInputLogicGate";
+import { TargetHandleMapping as EdgeNodeMapping } from "./targetHandleMapping";
 
 export class Diagram {
   private connectors: IDictionary<ConnectorId, INode> = new Dictionary<
@@ -75,6 +78,19 @@ export class Diagram {
     if (node instanceof OutputNode) {
       this.connectors.add(node.output.id, node);
     }
+  }
+
+  public getEdgeNodeMapping(edgeId: EdgeId): EdgeNodeMapping {
+    const edge = this.edges.filter((e) => e.id.equals(edgeId))[0];
+    var source = this.connectors.get(edge.sourceId);
+    var target = this.connectors.get(edge.targetId);
+
+    const targetHandle =
+      target instanceof DualInputLogicGate
+        ? target.inputs.findIndex((i) => i.id.equals(edge.targetId))
+        : null;
+
+    return new EdgeNodeMapping(edgeId, source.id, target.id, targetHandle);
   }
 
   private simulate() {
